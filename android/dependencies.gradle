@@ -1,16 +1,17 @@
   allprojects {
 
-    dependencies{
-          implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
-    }
+    // dependencies{
+    //       implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
+    // }
 
 
     repositories {
         maven { url "https://jitpack.io" }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/google/' }
-        jcenter()
         google()
+        jcenter()
+        
 
     }
 }
