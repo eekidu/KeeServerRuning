@@ -1,3 +1,21 @@
+  allprojects {
+
+    dependencies{
+          implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
+    }
+
+
+    repositories {
+        maven { url "https://jitpack.io" }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google/' }
+        jcenter()
+        google()
+
+    }
+}
+
+
 ext {
 
 
@@ -47,7 +65,7 @@ ext {
 
 
 // api implementation
-    supportDependencies = [androidX                : "androidx.appcompat:appcompat:1.0.2",
+    supportDependencies = [appcompat                : "androidx.appcompat:appcompat:1.0.2",
                            design                  : "com.android.support:design:${supportLibraryVersion}",
                            recyclerview            : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
                            constraintLayout        : 'com.android.support.constraint:constraint-layout:1.1.3',
