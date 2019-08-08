@@ -19,6 +19,10 @@
 
 ext {
 
+  wantUi{
+    api 'com.google.code.gson:gson:2.8.0'
+  }
+
 
 //      compileSdkVersion rootProject.ext.android.compileSdkVersion
 //      defaultConfig {
