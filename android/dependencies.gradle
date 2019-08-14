@@ -1,3 +1,7 @@
+  
+// apply from: "https://raw.githubusercontent.com/eekidu/KeeServerRuning/master/android/dependencies.gradle"
+
+
   allprojects {
 
     // dependencies{
@@ -61,6 +65,10 @@ ext {
             glideCompiler      : "com.github.bumptech.glide:compiler:${glideVersion}",
     ]
 
+
+    // ui.each({
+    //     item -> implementation item.value
+    // })
 
     ui = [
             cardview        : "androidx.cardview:cardview:1.0.0",
