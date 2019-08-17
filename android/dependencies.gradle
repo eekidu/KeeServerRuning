@@ -42,7 +42,6 @@ ext {
                versionCode      : 1,
                versionName      : "1.0"]
 
-    supportLibraryVersion = '27.1.1'
     butterknifeVersion = '9.0.0'
     retrofitVersion = '2.4.0'
     glideVersion = '4.8.0'
@@ -79,9 +78,6 @@ ext {
 
 // api implementation
     supportDependencies = [appcompat                : "androidx.appcompat:appcompat:1.0.2",
-                           design                  : "com.android.support:design:${supportLibraryVersion}",
-                           recyclerview            : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
-                           constraintLayout        : 'com.android.support.constraint:constraint-layout:1.1.3',
                            MPAndroidChart          : 'com.github.PhilJay:MPAndroidChart:v3.0.3',
                            butterknife             : "com.jakewharton:butterknife:${butterknifeVersion}",
                            okhttp                  : 'com.squareup.okhttp3:okhttp:3.9.0',
