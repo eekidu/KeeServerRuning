@@ -1,12 +1,26 @@
 {
-	"splash":{
-		"img":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/splash_2018_12_15.jpg",
-		"video":"https://gitee.com/ksee/KeeServerRuning/raw/master/video/1574600318202011.mp4"
-	},
-	"home":{
+    "splash":{
+        "img":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/splash_2018_12_15.jpg",
+        "video":"https://gitee.com/ksee/KeeServerRuning/raw/master/video/1574600318202011.mp4"
+    },
+    "home":{
+        "bannerList":[
+            {
+                "img":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/splash_2018_12_15.jpg",
+                "url":"",
+                "title":""
+            },{
+                "img":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/splash_2018_12_15.jpg",
+                "url":"",
+                "title":""
+            }, {
+                "img":"http://image.bitautoimg.com/appimage/cheyou/h/20190813/w750_h454_a6def4994995409c9c75f828d5c1663b.png",
+                "url":"",
+                "title":"车展"
+            }
+        ]
+    },
+    "appVersion":{
 
-	},
-	"appVersion":{
-
-	}
+    }
 }
