@@ -1,26 +1,39 @@
 {
-    "splash":{
-        "img":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/splash_2018_12_15.jpg",
-        "video":"https://gitee.com/ksee/KeeServerRuning/raw/master/video/1574600318202011.mp4"
-    },
-    "home":{
-        "bannerList":[
-            {
-                "img":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/splash_2018_12_15.jpg",
-                "url":"",
-                "title":""
-            },{
-                "img":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/splash_2018_12_15.jpg",
-                "url":"",
-                "title":""
-            }, {
-                "img":"http://image.bitautoimg.com/appimage/cheyou/h/20190813/w750_h454_a6def4994995409c9c75f828d5c1663b.png",
-                "url":"",
-                "title":"车展"
-            }
-        ]
-    },
-    "appVersion":{
+	"splash":{
+		"imageUrl":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/splash_2018_12_15.jpg",
+		"videoUrl":"https://gitee.com/ksee/KeeServerRuning/raw/master/video/1574600318202011.mp4"
+	},
+	"home":{
+		"secondfloor":{
+			"imageUrl":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/splash_2018_12_15.jpg",
+			"url":"",
+			"title":""
+		},
+		"bannerList":[
+			{
+				"imageUrl":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/splash_2018_12_15.jpg",
+				"url":"",
+				"title":""
+			},{
+				"imageUrl":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/splash_2018_12_15.jpg",
+				"url":"",
+				"title":""
+			}, {
+				"imageUrl":"http://image.bitautoimg.com/appimage/cheyou/h/20190813/w750_h454_a6def4994995409c9c75f828d5c1663b.png",
+				"url":"",
+				"title":"车展"
+			}
+		],
+		"tabList":[
+			{"id":1,
+			"title":"推荐"},
+			{"id":2,
+			"title":"视频"},
+			{"id":3,
+			"title":"直播"}
+		]
+	},
+	"appVersion":{
 
-    }
+	}
 }
