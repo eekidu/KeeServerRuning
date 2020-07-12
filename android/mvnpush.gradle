@@ -136,10 +136,10 @@ artifacts {
 //}
 
 
-task testhh(group: "upload") {
-    doLast {
+// task testhh(group: "upload") {
+//     doLast {
 
-        def property = System.getProperty('env')
-        log("当前项目：${project.name},当前path${project.path}")
-    }
-}
+//         def property = System.getProperty('env')
+//         log("当前项目：${project.name},当前path${project.path}")
+//     }
+// }
