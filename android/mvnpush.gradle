@@ -1,3 +1,6 @@
+// Note:
+// 1、应用该gradle文件，应该在应用library插件之后。
+
 //ext {
 //    GROUP = "github.kuan"
 //    ARTIFACT = "kuantest"
@@ -8,7 +11,7 @@
 apply plugin: 'maven'
 
 
-//def MAVEN_REPOSITORY_LOCAL = "../repository"
+def MAVEN_REPOSITORY_LOCAL = "../repository"
 def MAVEN_REPOSITORY_RELEASE = 'https://repo.rdc.aliyun.com/repository/106185-release-7pAGE0/'
 def MAVEN_REPOSITORY_SNAPSHOT = 'https://repo.rdc.aliyun.com/repository/106185-snapshot-hb7mLT/'
 
@@ -22,8 +25,8 @@ ext {
 //    git_branch_name = getGitBranch()
     snapshotName = 'snapshot.gradle'
     archive_file_name = 'archive.txt'
-    pushType = ""
-    env = ""
+    pushType = ""// release snapshot
+    env = ""//local
     desc = ""
 }
 
@@ -34,7 +37,7 @@ uploadArchives {
             throw new Exception("you can not push an application")
         }
 
-        def property = System.getProperty("env")
+        def env = System.getProperty("env")
         def pushType = System.getProperty("pushType")
 
         if ("snapshot" == pushType) {
@@ -42,21 +45,24 @@ uploadArchives {
         } else {
 
         }
-        log("uploadArchives策略：${pushType} , ${property} \n")
+        log("uploadArchives策略：${pushType} , ${env} \n")
 
         repositories.mavenDeployer {
 
-            // 配置本地仓库路径，项目根目录下的repository目录中
-            // repository(url: uri(MAVEN_REPOSITORY_RELEASE))
-            //snapshotRepository(url: uri(MAVEN_REPOSITORY_SNAPSHOT))
+            if ("local".equals(env)) {
+                // 配置本地仓库路径，项目根目录下的repository目录中
+                repository(url: uri(MAVEN_REPOSITORY_LOCAL))
+                snapshotRepository(url: uri(MAVEN_REPOSITORY_LOCAL))
+            } else {
+                //私有仓库
+                repository(url: MAVEN_REPOSITORY_RELEASE) {
+                    authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+                }
+                snapshotRepository(url: MAVEN_REPOSITORY_SNAPSHOT) {
+                    authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+                }
+            }
 
-            //私有仓库
-            repository(url: MAVEN_REPOSITORY_RELEASE) {
-                authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
-            }
-            snapshotRepository(url: MAVEN_REPOSITORY_SNAPSHOT) {
-                authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
-            }
             pom.groupId = GROUP// 唯一标识（通常为模块包名，也可以任意）
             pom.artifactId = ARTIFACT // 项目名称（通常为类库模块名称，也可以任意）
             pom.version = VERSION // 版本号
@@ -75,17 +81,17 @@ uploadArchives {
 task uploadSnapShot(group: 'upload') {
     doLast {
         exec {
-            commandLine 'sh', '-c', "gradle :${project.name}:uploadArchives -DpushType=snapshot"
+            commandLine 'sh', '-c', "gradle uploadArchives -DpushType=snapshot"
         }
     }
 }
 
 
-task uploadForTest {
+task uploadSnapShotLocal {
     group 'upload'
     doLast {
         exec {
-            commandLine 'sh', '-c', "gradle :${project.name}:uploadArchives -DpushType=snapshot -Denv=local"
+            commandLine 'sh', '-c', "gradle uploadArchives -DpushType=snapshot -Denv=local"
         }
     }
 }
@@ -133,7 +139,7 @@ artifacts {
 task testhh(group: "upload") {
     doLast {
 
-        def property = System.getProperty('env');
-        log("有没有找到：${property}")
+        def property = System.getProperty('env')
+        log("当前项目：${project.name},当前path${project.path}")
     }
 }
