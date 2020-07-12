@@ -1,0 +1,139 @@
+//ext {
+//    GROUP = "github.kuan"
+//    ARTIFACT = "kuantest"
+//    VERSION = "1.1.2"
+//}
+
+
+apply plugin: 'maven'
+
+
+//def MAVEN_REPOSITORY_LOCAL = "../repository"
+def MAVEN_REPOSITORY_RELEASE = 'https://repo.rdc.aliyun.com/repository/106185-release-7pAGE0/'
+def MAVEN_REPOSITORY_SNAPSHOT = 'https://repo.rdc.aliyun.com/repository/106185-snapshot-hb7mLT/'
+
+//def MAVEN_REPOSITORY_RELEASE = "../repository"
+//def MAVEN_REPOSITORY_SNAPSHOT = '../repository'
+
+ext {
+    NEXUS_USERNAME = 'rH2y5n'
+    NEXUS_PASSWORD = 'ms2O8SQJka'
+    BUILD_VER_NAME = ''
+//    git_branch_name = getGitBranch()
+    snapshotName = 'snapshot.gradle'
+    archive_file_name = 'archive.txt'
+    pushType = ""
+    env = ""
+    desc = ""
+}
+
+uploadArchives {
+    //检查是否是Application
+    doFirst {
+        if (project.pluginManager.findPlugin("com.android.application") != null) {
+            throw new Exception("you can not push an application")
+        }
+
+        def property = System.getProperty("env")
+        def pushType = System.getProperty("pushType")
+
+        if ("snapshot" == pushType) {
+            VERSION = "${VERSION}-${fetchTime()}-SNAPSHOT"
+        } else {
+
+        }
+        log("uploadArchives策略：${pushType} , ${property} \n")
+
+        repositories.mavenDeployer {
+
+            // 配置本地仓库路径，项目根目录下的repository目录中
+            // repository(url: uri(MAVEN_REPOSITORY_RELEASE))
+            //snapshotRepository(url: uri(MAVEN_REPOSITORY_SNAPSHOT))
+
+            //私有仓库
+            repository(url: MAVEN_REPOSITORY_RELEASE) {
+                authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+            }
+            snapshotRepository(url: MAVEN_REPOSITORY_SNAPSHOT) {
+                authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+            }
+            pom.groupId = GROUP// 唯一标识（通常为模块包名，也可以任意）
+            pom.artifactId = ARTIFACT // 项目名称（通常为类库模块名称，也可以任意）
+            pom.version = VERSION // 版本号
+        }
+    }
+
+    doLast {
+        project.logger.error("\n发布完成:${GROUP}:${ARTIFACT}:${VERSION}\n")
+    }
+
+}
+
+/**
+ * 发布快照包
+ */
+task uploadSnapShot(group: 'upload') {
+    doLast {
+        exec {
+            commandLine 'sh', '-c', "gradle :${project.name}:uploadArchives -DpushType=snapshot"
+        }
+    }
+}
+
+
+task uploadForTest {
+    group 'upload'
+    doLast {
+        exec {
+            commandLine 'sh', '-c', "gradle :${project.name}:uploadArchives -DpushType=snapshot -Denv=local"
+        }
+    }
+}
+
+task 推包并打开审核界面(group: "upload", dependsOn: uploadArchives) {
+    doLast {
+        exec {
+            commandLine 'sh', '-c', "open http://www.baidu.com"
+        }
+    }
+}
+
+
+// 显示的时间格式，形如20171110
+def fetchTime() {
+    return new Date().format("yyyyMMddHHmm", TimeZone.getDefault())
+}
+
+def log(param1) {
+    print(param1)
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+    archives androidSourcesJar
+//    archives androidJavadocsJar
+}
+
+//task androidJavadocs(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += configurations.compile
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+
+//task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+//    classifier = 'javadoc'
+//    from androidJavadocs.destinationDir
+//}
+
+
+task testhh(group: "upload") {
+    doLast {
+
+        def property = System.getProperty('env');
+        log("有没有找到：${property}")
+    }
+}
