@@ -1,5 +1,5 @@
 // Note:
-// 1、应用该gradle文件，应该在应用library插件之后。
+// 1、应用该gradle文件，应该在应用library插件之后。apply from: "https://gitee.com/ksee/KeeServerRuning/raw/master/android/mvnpush.gradle"
 
 //ext {
 //    GROUP = "github.kuan"
