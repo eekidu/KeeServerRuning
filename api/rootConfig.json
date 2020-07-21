@@ -5,9 +5,11 @@
 	},
 	"home":{
 		"secondfloor":{
-			"imageUrl":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/splash_2018_12_15.jpg",
-			"url":"",
-			"title":""
+			"indicateImgUrl":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/car.png",
+			"bigImgUrl":"https://gitee.com/ksee/KeeServerRuning/raw/master/img/erlou.jpg",
+			"refreshHit":"刷新提示",
+			"url":"http://www.baidu.com",
+			"title":"测试二楼"
 		},
 		"bannerList":[
 			{
