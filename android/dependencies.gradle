@@ -1,5 +1,5 @@
   
-// apply from: "https://raw.githubusercontent.com/eekidu/KeeServerRuning/master/android/dependencies.gradle"
+// apply from: "https://gitee.com/ksee/KeeServerRuning/raw/master/android/dependencies.gradle"
 
 
   allprojects {
@@ -10,12 +10,31 @@
 
 
     repositories {
-        maven { url "https://jitpack.io" }
+        jcenter()
+
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/google/' }
         google()
-        jcenter()
-        
+
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+
+        maven {
+            credentials {
+                username 'rH2y5n'
+                password 'ms2O8SQJka'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/106185-release-7pAGE0/'
+        }
+        maven {
+            credentials {
+                username 'rH2y5n'
+                password 'ms2O8SQJka'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/106185-snapshot-hb7mLT/'
+        }
+        maven { url "https://jitpack.io" }
 
     }
 }
