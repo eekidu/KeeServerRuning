@@ -61,7 +61,7 @@ ext {
                versionCode      : 1,
                versionName      : "1.0"]
 
-    butterknifeVersion = '9.0.0'
+    butterknifeVersion = '10.0.0'
     retrofitVersion = '2.4.0'
     glideVersion = '4.8.0'
 
