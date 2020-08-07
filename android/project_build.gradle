@@ -1,0 +1,41 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.0.0'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google/' }
+        google()
+
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+
+        maven {
+            credentials {
+                username 'rH2y5n'
+                password 'ms2O8SQJka'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/106185-release-7pAGE0/'
+        }
+        maven {
+            credentials {
+                username 'rH2y5n'
+                password 'ms2O8SQJka'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/106185-snapshot-hb7mLT/'
+        }
+        maven { url "https://jitpack.io" }
+
+    }
+}
