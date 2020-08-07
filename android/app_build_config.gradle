@@ -1,0 +1,44 @@
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            }
+        }
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+
+        //阿里路由
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+//    dependencies {
+//        annotationProcessor rootProject.ext.annotationProcessorDependencies.butterknifeCompiler
+//        annotationProcessor rootProject.ext.annotationProcessorDependencies.arouterComiler
+//        annotationProcessor rootProject.ext.annotationProcessorDependencies.glideCompiler
+//    }
+//    dependencies {
+//        annotationProcessor "com.jakewharton:butterknife-compiler:10.0.0"
+//        annotationProcessor "com.github.bumptech.glide:compiler:4.10.0"
+//        annotationProcessor "com.alibaba:arouter-compiler:1.2.2"
+//    }
+}
