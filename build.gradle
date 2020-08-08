@@ -29,6 +29,7 @@ task TestMain(group: "upload") {
 //        print(string)
 
 //        updateVersion("group", "apd", "10.32")
+        print("读取环境变量：${System.getenv("GROUPID")}")
     }
 }
 
