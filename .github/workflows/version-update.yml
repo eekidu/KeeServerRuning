@@ -29,9 +29,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-#          echo "Hello ${{ github.event.inputs.name }}!"
-#          echo "- in ${{ github.event.inputs.home }}!"
-          echo "${{ github.event.inputs.groupId }}:${{ github.event.inputs.artifactId }}:${{ github.event.inputs.version }}"
+          echo "Hello ${{ github.event.inputs.groupId }}!"
+          echo "- in ${{ github.event.inputs.artifactId }}!"
+          echo "- in ${{ github.event.inputs.version }}!"
+#          echo "${{ github.event.inputs.groupId }}:${{ github.event.inputs.artifactId }}:${{ github.event.inputs.version }}"
     #
     #  build:
     #    runs-on: ubuntu-latest
