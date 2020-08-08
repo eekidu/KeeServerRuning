@@ -21,11 +21,12 @@ buildscript {
 }
 
 task TestMain(group: "upload") {
-
-    def client = initClient()
-    def build = new Request.Builder().url("http://www.baidu.com").get().build()
-    def string = client.newCall(build).execute().body().string()
-    print(string)
+    doLast {
+        def client = initClient()
+        def build = new Request.Builder().url("http://www.baidu.com").get().build()
+        def string = client.newCall(build).execute().body().string()
+        print(string)
+    }
 }
 
 
