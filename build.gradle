@@ -28,7 +28,7 @@ task TestMain(group: "upload") {
 //        def string = client.newCall(build).execute().body().string()
 //        print(string)
 
-        updateVersion("group", "apd", "10.32")
+//        updateVersion("group", "apd", "10.32")
     }
 }
 
