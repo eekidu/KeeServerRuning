@@ -53,6 +53,8 @@ jobs:
           GROUPID: ${{ github.event.inputs.groupId }}
           ARTIFACTID: ${{ github.event.inputs.artifactId }}
           VERSION: ${{ github.event.inputs.version }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
 #          echo "${{ github.event.inputs.groupId }}:${{ github.event.inputs.artifactId }}:${{ github.event.inputs.version }}"
     #
     #  build:
