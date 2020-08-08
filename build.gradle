@@ -7,6 +7,7 @@
 
 import okhttp3.*
 import groovy.json.JsonSlurper
+import okio.BufferedSink
 
 import java.util.concurrent.TimeUnit
 
@@ -22,10 +23,12 @@ buildscript {
 
 task TestMain(group: "upload") {
     doLast {
-        def client = initClient()
-        def build = new Request.Builder().url("http://www.baidu.com").get().build()
-        def string = client.newCall(build).execute().body().string()
-        print(string)
+//        def client = initClient()
+//        def build = new Request.Builder().url("http://www.baidu.com").get().build()
+//        def string = client.newCall(build).execute().body().string()
+//        print(string)
+
+        updateVersion("group", "apd", "10.32")
     }
 }
 
@@ -44,4 +47,36 @@ def initClient() {
         }
     }).build()
     return okClient
+}
+
+
+def updateVersion(GROUP, POM_ARTIFACT_ID, BUILD_VER_NAME) {
+    def owner = "eekidu"
+    def repo = "KeeServerRuning"
+    def workflowId = "2"
+
+    RequestBody requestBody = new FormBody.Builder()
+            .add("name", "haikuan")
+            .add("home", "北京").build()
+
+    Request request = new Request.Builder()
+            .header("Accept", "application/vnd.github.v3+json")
+            .url("https://api.github.com/repos/${}/${repo}/actions/workflows/${workflowId}/dispatches")
+            .post(requestBody).build()
+    def client = initClient()
+    def reponse = client.newCall(request).execute()
+    print(reponse.code())
+    print(reponse.body().string())
+
+}
+
+
+//    curl \
+//  -H "Accept: application/vnd.github.v3+json" \
+//  https://api.github.com/repos/eekidu/KeeServerRuning
+
+def getee(){
+    def url ="https://api.github.com/repos/eekidu/KeeServerRuning/actions/runs"
+
+
 }

@@ -1,3 +1,7 @@
+![Manually triggered workflow](https://github.com/eekidu/KeeServerRuning/workflows/Manually%20triggered%20workflow/badge.svg)
+
+
+
 # Static ServerRuning
 A static server for my app, reply some json data
 视频：https://github.com/eekidu/KeeServerRuning/raw/master/1574600318202011.mp4
