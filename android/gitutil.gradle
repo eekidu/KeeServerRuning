@@ -1,0 +1,84 @@
+task GitTag(group: "Upload") {
+//    print("${getLastTag()}")
+    print("${creatTagAndPush("T2")}")
+}
+
+
+/**
+ * 获取当前Git分支名称
+ */
+def getGitBranch() {
+    def branch = 'git symbolic-ref --short -q HEAD'.execute().text.trim()
+    return branch ? branch : "develop"
+}
+
+/**
+ * @return 当前head的hash
+ */
+def getGitHeadHash() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+
+/**
+ * 获取最近count条提交记录
+ */
+def getCommitLogs(count) {
+    def code = new ByteArrayOutputStream()
+    try {
+        exec {
+            commandLine 'git', 'log', '--pretty=format:"%h, - %an, %cd,  %s"', "-n ${count}"
+            standardOutput = code
+        }
+    } catch (Throwable e) {
+        e.printStackTrace()
+    }
+    return code.toString().trim()
+}
+
+/**
+ * 检查是否有未提交的代码
+ * @return
+ */
+def checkStateClean() {
+    def rs = "git fetch origin".execute().text.trim()
+    rs = "git status".execute().text.trim()
+    //if (rs.contains("Changes not staged for commit") || rs.contains("Untracked files")) {
+    if (rs.contains("(use \"git add") || rs.contains("(use \"git push") || rs.contains("(use \"git pull")) {
+        print("checkStateClean返回---> false")
+        return false
+    } else {
+        print("checkStateClean返回---> true")
+        return true
+    }
+}
+
+/**
+ * 获取最新的tag
+ * @return
+ */
+def getLastTag() {
+    def fetch_tags = ['sh', '-c', 'git fetch --tags'].execute().text.trim()
+    return ['sh', '-c', 'git describe --tags `git rev-list --tags --max-count=1`'].execute().text.trim()
+}
+
+/**
+ * 创建并推送Tag
+ * @param tagName
+ * @return
+ */
+def creatTagAndPush(tagName) {
+    if (tagName == null) {
+        throw new GradleException("tagName 不能为空!")
+    }
+
+    exec {
+        commandLine 'git', 'tag', tagName
+    }
+
+    exec {
+        commandLine 'git', 'push', 'origin', tagName
+    }
+
+    print("${tagName}  -${rs}")
+}
