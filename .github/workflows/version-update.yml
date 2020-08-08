@@ -12,12 +12,12 @@ on:
         default: 'eekidu'
 
       artifactId:
-        description: 'location'
+        description: 'artifactId'
         required: true
         default: 'artifactId'
 
       version:
-        description: 'location'
+        description: 'version'
         required: true
         default: 'version'
 
