@@ -5,3 +5,42 @@
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
  */
 
+import okhttp3.*
+import groovy.json.JsonSlurper
+
+import java.util.concurrent.TimeUnit
+
+buildscript {
+    repositories {
+        maven() { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    }
+    dependencies {
+        //https://github.com/square/okhttp
+        classpath "com.squareup.okhttp3:okhttp:3.10.0"
+    }
+}
+
+task TestMain(group: "upload") {
+
+    def client = initClient()
+    def build = new Request.Builder().url("http://www.baidu.com").get().build()
+    def string = client.newCall(build).execute().body().string()
+    print(string)
+}
+
+
+def initClient() {
+    def okClient = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .addNetworkInterceptor(new Interceptor() {
+        @Override
+        Response intercept(Interceptor.Chain chain) throws IOException {
+//            Request newReq = chain.request().newBuilder()
+//                    .addHeader("PRIVATE-TOKEN", gl_token).build();
+            Request newReq = chain.request()
+            return chain.proceed(newReq)
+        }
+    }).build()
+    return okClient
+}
