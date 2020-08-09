@@ -56,9 +56,10 @@ jobs:
 
   gitUpdate:
     runs-on: ubuntu-latest
+    needs: [update_dp_version]
     steps:
       - run: |
-          git --version
-          git --version
-          git --version
+          git add .
+          git commit -m "update auto by action"
+          git push
         
