@@ -9,17 +9,17 @@ on:
       groupId:
         description: 'groupId'
         required: true
-        default: 'eekidu'
+        default: 'github.kuan'
 
       artifactId:
         description: 'artifactId'
         required: true
-        default: 'artifactId'
+        default: 'commdp'
 
       version:
         description: 'version'
         required: true
-        default: 'version'
+        default: 'v1.0'
 
 jobs:
   say_hello:
@@ -61,7 +61,8 @@ jobs:
     needs: [update_dp_version]
     steps:
       - run: |
-          cd ${{ github.workspace }}/KeeServerRuning
+          cd ${{ github.workspace }}
+          ls -all
           git add .
           git commit -m "update auto by action"
           git push
