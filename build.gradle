@@ -24,9 +24,10 @@ buildscript {
 }
 apply from: "./android/dependencies.gradle"
 apply from: "./android/ci/auto_update_dp_version.gradle"
+apply from: "./android/ci/update_file_script.gradle"
 
 //apply from: "/Users/kee/WorkSpace/other/KeeServerRuning/android/gitutil.gradle"
-//apply from: "/Users/kee/WorkSpace/other/KeeServerRuning/android/ci/update_file_script.gradle"
+
 
 task TestMain(group: "upload") {
     doLast {

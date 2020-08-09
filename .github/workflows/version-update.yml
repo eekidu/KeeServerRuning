@@ -47,7 +47,7 @@ jobs:
 
 
       - name: Update version Test
-        run: gradle TestMain
+        run: gradle taskUpdateVerFile
         env:
           GROUPID: ${{ github.event.inputs.groupId }}
           ARTIFACTID: ${{ github.event.inputs.artifactId }}

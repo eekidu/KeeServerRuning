@@ -3,6 +3,24 @@ ext {
 }
 
 
+task taskUpdateVerFile(group: "upload") {
+    doLast {
+        def groupId = System.getenv("groupId")
+        def artifactId = System.getenv("artifactId")
+        def version = System.getenv("version")
+
+        File targetFile = file("./android/app_component.gradle")
+        if (!targetFile.exists()) {
+            throw GradleException("待文件不存在:${targetFile.path}")
+        }
+
+        def newVersion = "${groupId}:${artifactId}:${version}"
+        println("修改的文件是：${targetFile.path} ,  ${newVersion}")
+
+    }
+}
+
+
 def updateVerFile(File depFile, String newVersion) {
     String[] split = newVersion.split(":")
     def targetDp = "${split[0]}:${split[1]}:"
