@@ -30,6 +30,7 @@ jobs:
           echo "- in ${{ github.event.inputs.artifactId }}!"
           echo "- in ${{ github.event.inputs.version }}!"
           echo "- in ${{ github.workspace }}!"
+          pwd
 
 
 
@@ -60,7 +61,7 @@ jobs:
     needs: [update_dp_version]
     steps:
       - run: |
-          cd ${{ github.workspace }}
+          cd ${{ github.workspace }}/KeeServerRuning
           git add .
           git commit -m "update auto by action"
           git push
