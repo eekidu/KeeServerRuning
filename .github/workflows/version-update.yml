@@ -60,7 +60,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [update_dp_version]
     steps:
+      - uses: actions/checkout@master
       - run: |
+          pwd
           cd ${{ github.workspace }}
           ls -all
           git add .
