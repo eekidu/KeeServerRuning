@@ -5,9 +5,9 @@ ext {
 
 task taskUpdateVerFile(group: "upload") {
     doLast {
-        def groupId = System.getenv("groupId")
-        def artifactId = System.getenv("artifactId")
-        def version = System.getenv("version")
+        def groupId = System.getenv("GROUPID")
+        def artifactId = System.getenv("ARTIFACTID")
+        def version = System.getenv("VERSION")
 
         File targetFile = file("./android/app_component.gradle")
         if (!targetFile.exists()) {
