@@ -54,6 +54,11 @@ jobs:
           VERSION: ${{ github.event.inputs.version }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
-      - name: Commit
-        run: |
-        git --version
+  gitUpdate:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          git --version
+          git --version
+          git --version
+        
