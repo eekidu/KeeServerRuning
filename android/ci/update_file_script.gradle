@@ -9,6 +9,7 @@ task taskUpdateVerFile(group: "upload") {
         def artifactId = System.getenv("ARTIFACTID")
         def version = System.getenv("VERSION")
 
+
         File targetFile = file("./android/app_component.gradle")
         if (!targetFile.exists()) {
             throw GradleException("待文件不存在:${targetFile.path}")

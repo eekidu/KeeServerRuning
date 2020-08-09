@@ -37,7 +37,7 @@ task TestMain(group: "upload") {
 //                "1.1.0")
 
 //        def targetFile = file("./android/app_component.gradle")
-//        update_ver_file(targetFile, "github.kuan:commdp:1199.0.0-202008071438-SNAPSHOT")
+//        update_ver_file(targetFile, "github.kuan:commdp:v1.0")
 //        println(get_GitBranch())
     }
 }

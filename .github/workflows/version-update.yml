@@ -56,12 +56,8 @@ jobs:
           VERSION: ${{ github.event.inputs.version }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
-  gitUpdate:
-    runs-on: ubuntu-latest
-    needs: [update_dp_version]
-    steps:
-      - uses: actions/checkout@master
-      - run: |
+      - name: gitUpdate
+        run: |
           pwd
           cd ${{ github.workspace }}
           ls -all
