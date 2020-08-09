@@ -57,9 +57,12 @@ jobs:
       - name: Commit
         run: git --version
         git push
-    #        git add .
-    #        git commit -m "update auto by action"
-    #        git push
+
+
+
+#        git add .
+#        git commit -m "update auto by action"
+#        git push
 
     #          echo "${{ github.event.inputs.groupId }}:${{ github.event.inputs.artifactId }}:${{ github.event.inputs.version }}"
     #
