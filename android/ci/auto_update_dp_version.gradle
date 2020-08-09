@@ -1,0 +1,81 @@
+import okhttp3.*
+import com.google.gson.*
+
+import java.util.concurrent.TimeUnit
+
+buildscript {
+    repositories {
+        maven() { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    }
+    dependencies {
+        //https://github.com/square/okhttp
+        classpath "com.squareup.okhttp3:okhttp:3.10.0"
+        classpath "com.google.code.gson:gson:2.8.0"
+    }
+}
+
+final def JsonMediaType = MediaType.parse("application/json; charset=utf-8")
+
+ext {
+    owner = "eekidu"
+    repo = "KeeServerRuning"
+    workflowId = "2138894"
+
+    update_ver = { group, artifact, version -> updateVersion(group, artifact, version) }
+
+//    ACCESS_TOKEN = System.getenv("ACCESS_TOKEN")
+    ACCESS_TOKEN = "84ac862b1d9de63b1f0469f335347133a6ffd981"
+    mClient = initClient()
+}
+
+
+
+def initClient() {
+    def okClient = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .addNetworkInterceptor(new Interceptor() {
+        @Override
+        Response intercept(Interceptor.Chain chain) throws IOException {
+            def newReq = chain.request().newBuilder()
+                    .addHeader("Accept", "application/vnd.github.v3+json")
+                    .addHeader("Authorization", "token " + ACCESS_TOKEN)
+                    .build()
+
+            return chain.proceed(newReq)
+        }
+    }).build()
+    return okClient
+}
+
+
+def updateVersion(GROUP, POM_ARTIFACT_ID, BUILD_VER_NAME) {
+    print("变更版本信息为：${GROUP}:${POM_ARTIFACT_ID}:${BUILD_VER_NAME}")
+    print("TOKEN:${ACCESS_TOKEN} ,${workflowId}")
+
+
+    JsonObject jsonObject = new JsonObject()
+    jsonObject.addProperty("ref", "master")
+
+    JsonObject inputs = new JsonObject()
+    inputs.addProperty("groupId", GROUP)
+    inputs.addProperty("artifactId", POM_ARTIFACT_ID)
+    inputs.addProperty("version", BUILD_VER_NAME)
+    jsonObject.add("inputs", inputs)
+    System.out.println(jsonObject.toString())
+
+
+    def JsonMediaType = MediaType.parse("application/json; charset=utf-8")
+    def reqBody = RequestBody.create(JsonMediaType, jsonObject.toString())
+
+
+    Request request = new Request.Builder()
+            .url("https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowId}/dispatches")
+            .post(reqBody).build()
+
+    def client = initClient()
+    def reponse = client.newCall(request).execute()
+    print(reponse.code())
+    print(reponse.body().string())
+
+}

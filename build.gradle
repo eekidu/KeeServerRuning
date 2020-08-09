@@ -5,11 +5,13 @@
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
  */
 
+
 import okhttp3.*
 import groovy.json.JsonSlurper
 import okio.BufferedSink
 
 import java.util.concurrent.TimeUnit
+
 
 buildscript {
     repositories {
@@ -20,78 +22,25 @@ buildscript {
         classpath "com.squareup.okhttp3:okhttp:3.10.0"
     }
 }
-ext {
-    ACCESS_TOKEN = "123456"
-}
+apply from: "./android/dependencies.gradle"
+apply from: "./android/ci/auto_update_dp_version.gradle"
+
 
 task TestMain(group: "upload") {
     doLast {
-//        def client = initClient()
-//        def build = new Request.Builder().url("http://www.baidu.com").get().build()
-//        def string = client.newCall(build).execute().body().string()
-//        print(string)
+//        测试更新
+//        update_ver("test.test",
+//                "base",
+//                "1.1.0")
 
-//        updateVersion("group", "apd", "10.32")
-        print("读取环境变量：${System.getenv("GROUPID")}")
 
-        ACCESS_TOKEN = System.getenv("ACCESS_TOKEN")
-
-        updateVersion(System.getenv("GROUPID"),
-                System.getenv("ARTIFACTID"),
-                System.getenv("VERSION"))
     }
 }
 
-
-def initClient() {
-    def okClient = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(10, TimeUnit.SECONDS)
-            .writeTimeout(10, TimeUnit.SECONDS)
-            .addNetworkInterceptor(new Interceptor() {
-        @Override
-        Response intercept(Interceptor.Chain chain) throws IOException {
-//            Request newReq = chain.request().newBuilder()
-//                    .addHeader("PRIVATE-TOKEN", gl_token).build();
-            Request newReq = chain.request()
-            return chain.proceed(newReq)
-        }
-    }).build()
-    return okClient
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
 
 
-def updateVersion(GROUP, POM_ARTIFACT_ID, BUILD_VER_NAME) {
-    print("变更版本信息为：${GROUP}:${POM_ARTIFACT_ID}:${BUILD_VER_NAME}")
-    print("TOKEN:${System.getenv("ACCESS_TOKEN")} ,${ACCESS_TOKEN}")
-//    def owner = "eekidu"
-//    def repo = "KeeServerRuning"
-//    def workflowId = "2"
-//
-//    def GITHUB_TOKEN=System.getenv("TOKEN")
-//
-//    RequestBody requestBody = new FormBody.Builder()
-//            .add("name", "haikuan")
-//            .add("home", "北京").build()
-//
-//    Request request = new Request.Builder()
-//            .header("Accept", "application/vnd.github.v3+json")
-//            .header("Authorization", "token "+GITHUB_TOKEN)
-//            .url("https://api.github.com/repos/${}/${repo}/actions/workflows/${workflowId}/dispatches")
-//            .post(requestBody).build()
-//    def client = initClient()
-//    def reponse = client.newCall(request).execute()
-//    print(reponse.code())
-//    print(reponse.body().string())
-
-}
 
 
-//    curl \
-//  -H "Accept: application/vnd.github.v3+json" \
-//  https://api.github.com/repos/eekidu/KeeServerRuning
-
-def getee() {
-    def url = "https://api.github.com/repos/eekidu/KeeServerRuning/actions/runs"
-
-
-}
