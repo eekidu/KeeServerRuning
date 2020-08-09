@@ -29,7 +29,6 @@ ext {
 }
 
 
-
 def initClient() {
     def okClient = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
@@ -37,11 +36,13 @@ def initClient() {
             .addNetworkInterceptor(new Interceptor() {
         @Override
         Response intercept(Interceptor.Chain chain) throws IOException {
+            def string = "token ${ACCESS_TOKEN}"
+
+            println("Token = ${string}")
             def newReq = chain.request().newBuilder()
                     .addHeader("Accept", "application/vnd.github.v3+json")
-                    .addHeader("Authorization", "token " + ACCESS_TOKEN)
+                    .addHeader("Authorization",string)
                     .build()
-
             return chain.proceed(newReq)
         }
     }).build()
@@ -50,8 +51,8 @@ def initClient() {
 
 
 def updateVersion(GROUP, POM_ARTIFACT_ID, BUILD_VER_NAME) {
-    print("变更版本信息为：${GROUP}:${POM_ARTIFACT_ID}:${BUILD_VER_NAME}")
-    print("TOKEN:${ACCESS_TOKEN} ,${workflowId}")
+    println("变更版本信息为：${GROUP}:${POM_ARTIFACT_ID}:${BUILD_VER_NAME}")
+    println("TOKEN:${ACCESS_TOKEN} ,${workflowId}")
 
 
     JsonObject jsonObject = new JsonObject()
