@@ -65,6 +65,8 @@ jobs:
           pwd
           cd ${{ github.workspace }}
           ls -all
+          git config --global user.name "action"
+          git config --global user.email "action@github.com"
           git add .
           git commit -m "update auto by action"
           git push
