@@ -29,6 +29,7 @@ jobs:
           echo "Hello ${{ github.event.inputs.groupId }}!"
           echo "- in ${{ github.event.inputs.artifactId }}!"
           echo "- in ${{ github.event.inputs.version }}!"
+          echo "- in ${{ github.workspace }}!"
 
 
 
