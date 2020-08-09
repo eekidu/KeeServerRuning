@@ -1,0 +1,49 @@
+ext {
+    update_ver_file = { defFile, newVersion -> updateVerFile(defFile, newVersion) }
+}
+
+
+def updateVerFile(File depFile, String newVersion) {
+    String[] split = newVersion.split(":")
+    def targetDp = "${split[0]}:${split[1]}:"
+
+    StringBuilder sb = new StringBuilder()
+    println(depFile.path)
+    depFile.eachLine { line ->
+        if (line.contains(targetDp)) {//该行包含需要替换的版本号
+            def srcVer = findReplaceRange(line)
+            def replaceAfter = line.replace(srcVer, newVersion)
+            println("${srcVer} ---> ${newVersion}")
+            sb.append(replaceAfter).append("\n")
+        } else {
+            sb.append(line).append("\n")
+        }
+    }
+
+    println(sb.toString())
+
+    def fileNew = file(new File(depFile.absolutePath))
+    fileNew.write(sb.toString())
+}
+
+/**
+ * 从行中找到需要替换的原始版本
+ * @param line
+ * @return github.kuan:commdp:1.0.0-202008071438-SNAPSHOT
+ */
+def findReplaceRange(String line) {
+    def index = line.indexOf("\"")
+    if (index > 0) {
+        def lastIndexOf = line.lastIndexOf("\"")
+        def srcVersion = line.substring(index + 1, lastIndexOf)
+//        println("双引号找到：${srcVersion}")
+        return srcVersion
+    }
+    def indexS = line.indexOf("\'")
+    if (indexS > 0) {
+        def lastIndexOf = line.lastIndexOf("\'")
+        def srcVersion = line.substring(indexS + 1, lastIndexOf)
+//        println("单引号找到：${srcVersion}")
+        return srcVersion
+    }
+}

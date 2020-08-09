@@ -79,3 +79,4 @@ def updateVersion(GROUP, POM_ARTIFACT_ID, BUILD_VER_NAME) {
     print(reponse.body().string())
 
 }
+

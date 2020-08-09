@@ -1,6 +1,10 @@
 task GitTag(group: "Upload") {
 //    print("${getLastTag()}")
-    print("${creatTagAndPush("T2")}")
+//    print("${creatTagAndPush("T2")}")
+}
+
+ext {
+    get_GitBranch = { getGitBranch() }
 }
 
 

@@ -25,6 +25,8 @@ buildscript {
 apply from: "./android/dependencies.gradle"
 apply from: "./android/ci/auto_update_dp_version.gradle"
 
+//apply from: "/Users/kee/WorkSpace/other/KeeServerRuning/android/gitutil.gradle"
+//apply from: "/Users/kee/WorkSpace/other/KeeServerRuning/android/ci/update_file_script.gradle"
 
 task TestMain(group: "upload") {
     doLast {
@@ -33,13 +35,16 @@ task TestMain(group: "upload") {
 //                "base",
 //                "1.1.0")
 
-
+//        def targetFile = file("./android/app_component.gradle")
+//        update_ver_file(targetFile, "github.kuan:commdp:1199.0.0-202008071438-SNAPSHOT")
+//        println(get_GitBranch())
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
 
 
 
