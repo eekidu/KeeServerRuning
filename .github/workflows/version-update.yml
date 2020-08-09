@@ -55,7 +55,8 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Commit
-        run: git --version
+        run: |
+        git --version
         git push
 
 
