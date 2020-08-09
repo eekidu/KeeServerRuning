@@ -17,7 +17,7 @@ task taskUpdateVerFile(group: "upload") {
 
         def newVersion = "${groupId}:${artifactId}:${version}"
         println("修改的文件是：${targetFile.path} ,  ${newVersion}")
-
+        updateVerFile(targetFile, newVersion)
     }
 }
 
