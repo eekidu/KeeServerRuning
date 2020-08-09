@@ -57,8 +57,13 @@ jobs:
       - name: Commit
         run: |
         git --version
-        git add .
-        git status
+
+
+
+
+
+#        git add .
+#        git status
 
 
 
