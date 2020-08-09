@@ -8,7 +8,8 @@
 //    VERSION = "1.0.0"
 //}
 
-
+//apply from: "https://raw.githubusercontent.com/eekidu/KeeServerRuning/master/android/ci/auto_update_dp_version.gradle"
+apply from: "https://gitee.com/ksee/KeeServerRuning/raw/master/android/ci/auto_update_dp_version.gradle"
 apply plugin: 'maven'
 
 
@@ -71,6 +72,7 @@ uploadArchives {
     }
 
     doLast {
+        update_ver(GROUP, ARTIFACT, VERSION)
         project.logger.error("\n发布完成:${GROUP}:${ARTIFACT}:${VERSION}\n")
     }
 
