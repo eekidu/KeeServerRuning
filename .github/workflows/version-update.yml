@@ -65,6 +65,7 @@ jobs:
           pwd
           cd ${{ github.workspace }}
           ls -all
+          git status
           git config --global user.name "action"
           git config --global user.email "action@github.com"
           git add .
