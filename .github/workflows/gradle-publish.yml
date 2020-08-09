@@ -8,6 +8,14 @@ on:
     branches:
       - master
 jobs:
+
+  showAllParams:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Hello ${{ github.workspace }}!"
+
+
   build:
 
     runs-on: ubuntu-latest
