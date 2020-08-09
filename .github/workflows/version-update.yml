@@ -55,7 +55,9 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Commit
-        run: git status
+        run: git add .
+        git commit -m "update auto by action"
+        git push
 
     #          echo "${{ github.event.inputs.groupId }}:${{ github.event.inputs.artifactId }}:${{ github.event.inputs.version }}"
     #
