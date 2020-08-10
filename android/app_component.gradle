@@ -1,7 +1,7 @@
 //app依赖的各个业务线版本
 ext{
     DEP=[
-            commondp:    "github.kuan:commdp:1.1.0",
+            commondp:    "github.kuan:commdp:1.1.0-202008101835-SNAPSHOT",
             //shortvideo:     "com.bitauto:shortvideo:202008061803_v202008061803_57bfb32",
     ]
 }
