@@ -72,8 +72,9 @@ uploadArchives {
     }
 
     doLast {
-        update_ver(GROUP, ARTIFACT, VERSION)git
         project.logger.error("\n发布完成:${GROUP}:${ARTIFACT}:${VERSION}\n")
+        update_ver(GROUP, ARTIFACT, VERSION)
+
     }
 
 }
