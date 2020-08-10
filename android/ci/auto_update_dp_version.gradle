@@ -24,10 +24,17 @@ ext {
     update_ver = { group, artifact, version -> updateVersion(group, artifact, version) }
 
 //    ACCESS_TOKEN = System.getenv("ACCESS_TOKEN")
-    ACCESS_TOKEN = "84ac862b1d9de63b1f0469f335347133a6ffd981"
+    //这里是转换之后的TOKEN，Github会使明文Token失效
+    ACCESS_TOKEN = new String(Base64.getDecoder().decode("ODQ1ZTBkZGEzM2Y5ZTEwYzJiZGU0ZmU5ODgxMmU3NWRmODk3OTUxYw=="))
     mClient = initClient()
 }
 
+
+task ApiTest(group: "upload") {
+    doLast {
+        print("TOKEN:${ACCESS_TOKEN}")
+    }
+}
 
 def initClient() {
     def okClient = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
@@ -41,7 +48,7 @@ def initClient() {
             println("Token = ${string}")
             def newReq = chain.request().newBuilder()
                     .addHeader("Accept", "application/vnd.github.v3+json")
-                    .addHeader("Authorization",string)
+                    .addHeader("Authorization", string)
                     .build()
             return chain.proceed(newReq)
         }
