@@ -22,6 +22,7 @@ buildscript {
         classpath "com.squareup.okhttp3:okhttp:3.10.0"
     }
 }
+
 apply from: "./android/dependencies.gradle"
 apply from: "./android/ci/auto_update_dp_version.gradle"
 apply from: "./android/ci/update_file_script.gradle"
