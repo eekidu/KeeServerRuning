@@ -31,14 +31,16 @@ apply from: "./android/ci/update_file_script.gradle"
 
 task TestMain(group: "upload") {
     doLast {
-//        触发CI测试更新 github.kuan:commdp:1.0.9
-        update_ver("github.kuan",
-                "commdp",
-                "1.0.9")
+//       GitHub 触发CI测试更新 github.kuan:commdp:1.0.9
+//        update_ver("github.kuan",
+//                "commdp",
+//                "1.0.9")
 
 //        def targetFile = file("./android/app_component.gradle")
 //        update_ver_file(targetFile, "github.kuan:commdp:v1.0")
 //        println(get_GitBranch())
+
+        println("测试执行!")
     }
 }
 
